@@ -8,3 +8,4 @@ CREATE TABLE github_users (
   username TEXT NOT NULL,
   email TEXT
 );
+

@@ -4,21 +4,23 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+const user = {
+  email: 'james@james.com',
+  password: 'helloworld',
+};
+
+
+
 describe('backend-express-template routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
   it('should log in user and error if email exists', async () => {
-    const res = await request
-      .agent(app)
-      .post('/api/v1/github/callback?code=42')
-      .redirects(1);
-
+    const res = await request(app).post('/api/v1/users').send(user);
+    const { email } = user;
     expect(res.body).toEqual({
       id: expect.any(String),
-      username: 'username',
-      iat: expect.any(Number),
-      exp: expect.any(Number),
+      email,
     });
   });
   afterAll(() => {
