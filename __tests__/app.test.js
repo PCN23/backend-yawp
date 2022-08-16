@@ -49,17 +49,11 @@ describe('backend-express-template routes', () => {
 
     expect(res.body).toEqual({ Message: 'You are in!' });
   });
-  it('GET /users should return a list of users', async () => {
-    const resp = await request(app).get('/users');
-    expect(resp.status).toBe(200);
-    expect(resp.body).toEqual([
-      {
-        user: {
-          id: expect.any(String),
-          email: 'james@james.com',
-          username: 'username',
-        }
-      }
-    ]);
+  it('should return a list of users if signed in as admin', async () => {
+    const [agent, user] = await registerAndLogin({ email: 'admin' });
+    const res = await agent.get('/api/v1/users');
+    
+
+    expect(res.body).toEqual([{ ...user }]);
   });
 });
