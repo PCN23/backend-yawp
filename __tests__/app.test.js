@@ -47,6 +47,6 @@ describe('backend-express-template routes', () => {
       password: user.password,
     });
 
-    expect(res.body).toEqual({ message: 'Signed in successfully!' });
+    expect(res.body).toEqual({ Message: 'You are in!' });
   });
 });
