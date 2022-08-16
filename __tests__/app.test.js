@@ -6,10 +6,9 @@ const app = require('../lib/app');
 
 const user = {
   email: 'james@james.com',
+  username: 'username',
   password: 'helloworld',
 };
-
-
 
 describe('backend-express-template routes', () => {
   beforeEach(() => {
@@ -17,10 +16,14 @@ describe('backend-express-template routes', () => {
   });
   it('should log in user and error if email exists', async () => {
     const res = await request(app).post('/api/v1/users').send(user);
-    const { email } = user;
+    const { email, username } = user;
     expect(res.body).toEqual({
-      id: expect.any(String),
-      email,
+      user: {
+        id: expect.any(String),
+        email,
+        username,
+      },
+      Message: 'You are in!',
     });
   });
   afterAll(() => {
