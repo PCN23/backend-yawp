@@ -34,7 +34,7 @@ describe('restaurant routes', () => {
     pool.end();
   });
   it('#GET restaurants/:id should return a single restaurant', async () => {
-    const resp = await request(app).get('/restaurants/2');
+    const resp = await request(app).get('/api/v1/restaurants/2');
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
       id: '2',
