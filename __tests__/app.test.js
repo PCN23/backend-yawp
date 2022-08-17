@@ -15,8 +15,8 @@ const registerAndLogin = async (userProps = {}) => {
 };
 
 const user = {
-  email: 'james@james.com',
   username: 'username',
+  email: 'james@james.com',
   password: 'helloworld',
 };
 
@@ -50,10 +50,14 @@ describe('backend-express-template routes', () => {
     expect(res.body).toEqual({ Message: 'You are in!' });
   });
   it('should return a list of users if signed in as admin', async () => {
-    const [agent, user] = await registerAndLogin({ email: 'admin' });
+    const [agent] = await registerAndLogin({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
     
 
-    expect(res.body).toEqual([{ ...user }]);
+    expect(res.body[1]).toEqual({
+      id: expect.any(String),
+      email: expect.any(String),
+      username: expect.any(String),
+    });
   });
 });

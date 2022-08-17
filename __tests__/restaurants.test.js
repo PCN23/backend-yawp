@@ -10,6 +10,9 @@ describe('restaurant routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
+  afterAll(() => {
+    pool.end();
+  });
   it('#GET /restaurants should return a list of restaurants', async () => {
     const resp = await request(app).get('/api/v1/restaurants');
     expect(resp.status).toBe(200);
@@ -29,9 +32,6 @@ describe('restaurant routes', () => {
         state: 'Florida',
       },
     ]);
-  });
-  afterAll(() => {
-    pool.end();
   });
   it('#GET restaurants/:id should return a single restaurant', async () => {
     const resp = await request(app).get('/api/v1/restaurants/2');
