@@ -25,6 +25,7 @@ CREATE TABLE reviews (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
     user_id BIGINT,
     restaurant_id BIGINT,
+    stars TEXT NOT NULL,
     detail VARCHAR(500) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
@@ -49,9 +50,10 @@ VALUES
 INSERT INTO reviews(
   user_id,
   restaurant_id,
+  stars,
   detail
 )
 VALUES (
-  '1','1',
+  '1','1', '5',
   'Burger was delicious'
 );
