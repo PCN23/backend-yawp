@@ -31,7 +31,7 @@ describe('backend-express-template routes', () => {
       user: {
         id: expect.any(String),
         email,
-        username,
+        username        
       },
       Message: 'You are in!',
     });
@@ -59,5 +59,11 @@ describe('backend-express-template routes', () => {
       email: expect.any(String),
       username: expect.any(String),
     });
+  });
+  it('DELETE /:id/reviews should delete a review', async () => {
+    const resp = await request(app).delete('/1/reviews');
+    expect(resp.status).toBe(200);
+    const delResp = await request(app).get('/1/reviews');
+    expect(delResp.status).toBe(404);
   });
 });

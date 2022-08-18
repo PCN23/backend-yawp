@@ -25,7 +25,7 @@ CREATE TABLE reviews (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
     user_id BIGINT,
     restaurant_id BIGINT,
-    stars TEXT NOT NULL,
+    stars VARCHAR NOT NULL,
     detail VARCHAR(500) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)

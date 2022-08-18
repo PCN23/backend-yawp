@@ -25,14 +25,16 @@ describe('review routes', () => {
     return setup(pool);
   });
   it('should add a new review', async () => {
-    const review = new Review({
+    const review = {
       stars: '5',
       detail: 'It was okay',
-    });
+    };
     const [agent] = await registerAndLogin();
     const res = await agent.post('/api/v1/restaurants/1/reviews').send(review);
     console.log(res.body);
     expect(res.body).toEqual({
+      restaurant_id: expect.any(String),
+      id: expect.any(String),
       detail: expect.any(String),
       stars: expect.any(String),
     });
