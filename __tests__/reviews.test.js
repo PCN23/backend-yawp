@@ -38,22 +38,15 @@ describe('review routes', () => {
     });
   });
   it('DELETE /:id/reviews should delete a review', async () => {
-    const agent = request.agent(app);
+    const [agent] = await registerAndLogin();
     await agent.post('/api/v1/users').send({ email: 'goats@yahoo.com', password: 'password' });
     await agent.post('/api/v1/restaurants/1/reviews').send({ detail: 'delicious food', stars: '4' });
     const res = await agent.get('/api/v1/restaurants/1');
-    console.log(res.body);
-    expect(res.body.reviews[0]).toEqual({
-      id: expect.any(Number),
-      detail: expect.any(String),
-      stars: expect.any(String),
-      user_id: expect.any(Number),
-      restaurant_id: expect.any(Number),
-    }); 
+    expect(res.body.reviews.length).toEqual(2); 
     const resp = await agent.delete('/api/v1/reviews/1');
     expect(resp.status).toBe(200);
-    const delResp = await agent.get('/api/v1/restaurants/1/reviews');
-    expect(delResp.body.reviews[0]).toBe(null);
+    const delResp = await agent.get('/api/v1/restaurants/1');
+    expect(delResp.body.reviews.length).toBe(1);
   });
   afterAll(() => {
     pool.end();
