@@ -3,9 +3,6 @@ const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
 
-
-
-
 describe('restaurant routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -23,6 +20,7 @@ describe('restaurant routes', () => {
         flavor: 'burger',
         city: 'Austin',
         state: 'Texas',
+        reviews: expect.any(Array),
       },
       {
         id: '2',
@@ -30,6 +28,7 @@ describe('restaurant routes', () => {
         flavor: 'breakfast',
         city: 'Jonestown',
         state: 'Florida',
+        reviews: expect.any(Array),
       },
     ]);
   });
@@ -42,6 +41,7 @@ describe('restaurant routes', () => {
       flavor: 'breakfast',
       city: 'Jonestown',
       state: 'Florida',
+      reviews: expect.any(Array),
     });
   });
 });
